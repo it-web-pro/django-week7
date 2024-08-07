@@ -1,7 +1,7 @@
 # Writing your first view
 
-ก่อนจะไปสร้าง view เรามาทำการ setup project "week7_tutorial" และสร้าง app "blogs" กันก่อน
-และทำการ copy models เหล่านี้ลงไปที่ `blogs/models.py`
+ก่อนจะไปสร้าง view เรามาทำการ setup project "week7_tutorial" และสร้าง app "polls" กันก่อน
+และทำการ copy models เหล่านี้ลงไปที่ `polls/models.py`
 
 ```python
 from django.db import models
@@ -23,16 +23,15 @@ class Choice(models.Model):
         return self.choice_text
 ```
 
-จากนั้นก็ `makemigrations` และ `migrate` และทำการ import `blogs.sql` เข้าไปใน database
+จากนั้นก็ `makemigrations` และ `migrate` และทำการ import `polls.sql` เข้าไปใน database
 
 ## Let's start!
 
 สำหรับ poll application เราสร้างจะ views ดังต่อไปนี้
 
 - Question “index” page – แสดงรายการ questions ล่าสุด
-- Question “detail” page – แสดง question text และฟอร์มสำหรับทำการโหวต
-- Question “results” page – แสดงผลลัพธ์การโหวตของ question
-- Vote action – สำหรับจัดการการโหวต
+- Question “detail” page – แสดง question text และตัวเลือก
+- Vote action – สำหรับทำการ vote
 
 เรามาเริ่มต้นด้วยการเพิ่ม code ด้านล่างนี้ใน `/polls/views.py`
 
@@ -46,13 +45,19 @@ def detail(request, question_id):
     return HttpResponse("You're looking at question %s." % question_id)
 
 
-def results(request, question_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % question_id)
-
-
 def vote(request, question_id):
     return HttpResponse("You're voting on question %s." % question_id)
+```
+
+กำหนด path สำหรับเข้าถึง `urls.py` ของ app polls ใน `week7_tutorial/urls.py`
+
+```python
+...
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("polls/", include("polls.urls")),
+]
 ```
 
 กำหนด path url สำหรับเข้าถึง views ด้านบน `/polls/urls.py`
@@ -67,8 +72,6 @@ urlpatterns = [
     path("", views.index, name="index"),
     # ex: /polls/5/
     path("<int:question_id>/", views.detail, name="detail"),
-    # ex: /polls/5/results/
-    path("<int:question_id>/results/", views.results, name="results"),
     # ex: /polls/5/vote/
     path("<int:question_id>/vote/", views.vote, name="vote"),
 ]
@@ -134,3 +137,149 @@ TEMPLATE_DIRS = (
 เรามาลอง start server ดูว่าหน้า index สามารถใช้งานได้ไหม
 
 เปิด browser และพิมพ์ url `http://127.0.0.1:8000/polls/`
+จะเห็นว่ามีรายการ questions แสดงขึ้นมา 5 รายการ
+
+เรามาทำให้ view อื่นๆ ใช้งานได้่กัน
+
+```python
+from django.shortcuts import render, redirect
+
+from .models import Question, Choice
+
+def index(request):
+    latest_question_list = Question.objects.order_by("-pub_date")[:5]
+    context = {"latest_question_list": latest_question_list}
+    return render(request, "index.html", context)
+
+def detail(request, question_id):
+    question = Question.objects.get(pk=question_id)
+    return render(request, "detail.html", {
+        "question": question,
+        "choices": question.choice_set.all()
+    })
+
+def vote(request, question_id):
+    question = Question.objects.get(pk=question_id)
+
+    if request.method == "GET":
+        return render(request, "vote.html", {
+            "question": question,
+            "choices": question.choice_set.all()
+        })
+    elif request.method == "POST":
+        choice_id = request.POST.get('choice')
+        choice = Choice.objects.get(pk=choice_id)
+        choice.votes += 1
+        choice.save()
+        return redirect("detail", question_id=question_id)
+```
+
+สร้างไฟล์ `/polls/templates/detail.html` และเพิ่ม code ด้านล่าง
+
+```html
+<html>
+    <head>
+    </head>
+    <body>
+        <h1>Question: {{ question.question_text }}</h1>
+        <p>Publist date: {{ question.pub_date }}</p>
+        <ul>
+        {% for choice in choices %}
+            <li>{{ choice.choice_text }} (Votes: {{choice.votes}})</li>
+        {% endfor %}
+        </ul>
+        <br/>
+            <a href="{% url 'vote' question.id %}">
+            <button>Let's Vote</button>
+        </a>
+    </body>
+</html>
+```
+
+สร้างไฟล์ `/polls/templates/vote.html` และเพิ่ม code ด้านล่าง
+
+```html
+<html>
+    <head>
+    </head>
+    <body>
+        <h1>Question: {{ question.question_text }}</h1>
+        <p>Publist date: {{ question.pub_date }}</p>
+        <form action="/polls/{{ question.id }}/vote/" method="POST">
+            {%csrf_token%}
+            <ul>
+            {% for choice in choices %}
+                <li>
+                    <input type="radio" id="choice{{ forloop.counter }}" name="choice" value="{{ choice.id }}">
+                    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+                </li>
+            {% endfor %}
+            </ul>
+            <input type="submit" value ="VOTE" name="submit"/>
+        </form>
+    </body>
+</html>
+```
+
+## Let's try class-based views
+
+เรามาลองเปลี่ยนเป็น class-based views กันบ้างนะครับ จะเห็นว่า code เป็นระเบียบขึ้น (ผมคิดว่านะ...)
+
+**แก้ไขใน `polls.views`**
+
+```python
+from django.shortcuts import render, redirect
+from django.views import View
+
+from .models import Question, Choice
+
+
+class IndexView(View):
+
+    def get(self, request):
+        latest_question_list = Question.objects.order_by("-pub_date")[:5]
+        context = {"latest_question_list": latest_question_list}
+        return render(request, "index.html", context)
+
+class PollView(View):
+
+    def get(self, request, question_id):
+        question = Question.objects.get(pk=question_id)
+        return render(request, "detail.html", {
+            "question": question,
+            "choices": question.choice_set.all()
+        })
+
+class VoteView(View):
+
+    def get(self, request, question_id):
+        question = Question.objects.get(pk=question_id)
+        return render(request, "vote.html", {
+            "question": question,
+            "choices": question.choice_set.all()
+        })
+    
+    def post(self, request, question_id):
+        choice_id = request.POST.get('choice')
+        choice = Choice.objects.get(pk=choice_id)
+        choice.votes += 1
+        choice.save()
+        return redirect("detail", question_id=question_id)
+```
+
+อย่าลืมไปแก้ไข `polls/urls.py` ด้วยนะครับเพิ่ม `.as_view()`
+
+```python
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    # ex: /polls/
+    path("", views.IndexView.as_view(), name="index"),
+    # ex: /polls/5/
+    path("<int:question_id>/", views.PollView.as_view(), name="detail"),
+    # ex: /polls/5/vote/
+    path("<int:question_id>/vote/", views.VoteView.as_view(), name="vote"),
+]
+```
