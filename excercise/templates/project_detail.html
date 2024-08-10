@@ -91,7 +91,6 @@
                 <!-- รายละเอียกของโปรเจค -->
                 <textarea placeholder="description" rows="4"> {{}} </textarea>
 
-
                 <!-- 
                     start_date และ due_date ต้องจัดให้อยู่ในรูปแบบ %Y-%m-%d โดยใช้ strftime ใน view ก่อนนำมาใช้
                     แนะนำให้ส่งแยก key
@@ -142,7 +141,7 @@
                     <div class="action">
 
                         <!-- function removeStaff ให้ส่ง id ของพนักงาน เช่น removeStaff(Number('{{ staff.id }}'))-->
-                        <button type="submit" class="delete" onclick="removeStaff(Number('{{  }}'))">Kick this Staff</button>
+                        <button type="submit" class="delete" onclick="removeStaff({{ }})">Kick this Staff</button>
 
                     </div>
                 </div>
@@ -155,7 +154,7 @@
     </main>
 </body>
 <script>
-    async function addStaff(){
+    function addStaff(){
         const emp = document.getElementById('input-add-staff');
         const data = {emp_id: emp.value};
         
