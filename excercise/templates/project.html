@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .itemGroup {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .item {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .item .action {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        button,
+        .btn {
+            padding: 10px 15px;
+            background-color: #466bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .btn.edit,
+        button.edit {
+            background-color: #f39c12;
+        }
+
+        .btn.delete,
+        button.delete {
+            background-color: #e74c3c;
+        }
+
+        input,
+        select,
+        textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .form {
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .form input {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'nav.html' %}
+
+    <main>
+        <div class="head">
+            <h1>Project</h1>
+        </div>
+
+        <div class="itemGroup">
+            
+            <div class="item">
+                <!-- โปรเจค id และ ชื่อ -->
+                <div>{{}}</div>
+
+                <!-- วันเริ่ม และ วันกำหนดส่งโปรเจค -->
+                <div>{{}} - {{}}</div>
+
+                <div class="action">
+                    <!-- กำหนด path ให้ถูกต้อง -->
+                    <a href="/" class="edit btn">แก้ไข</a>
+                    
+                    <!-- ถ้า code มันแจ้งเตือนอะไรก็ปล่อยไปนะครับไม่มีผลอะไร  -->
+                    <button type="submit" onclick="deleteProject({{ }})" class="delete">Delete</button>
+                </div>
+            </div>
+            
+        </div>
+        
+    </main>
+</body>
+<script>
+    function deleteProject(pro_id){
+
+        // กำหนด path ให้ถูกต้อง
+        fetch(`/api/example/${pro_id}/`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Item deleted successfully')
+            window.location.reload()
+        })
+        .catch(error => console.error('Error:', error));
+    }
+</script>
+</html>
