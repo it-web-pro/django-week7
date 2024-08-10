@@ -1,10 +1,10 @@
 -- Insert Departments
-INSERT INTO employee_department (name, manager_id) VALUES
-('IT', 1),
-('HR', 2),
-('Finance', 3),
-('Marketing', 4),
-('Operations', 5);
+INSERT INTO employee_department (name) VALUES
+('IT'),
+('HR'),
+('Finance'),
+('Marketing'),
+('Operations');
 
 
 -- Insert Positions
@@ -88,6 +88,6 @@ INSERT INTO employee_project_staff (project_id, employee_id) VALUES
 (2, 2), (2, 15), (2, 16), (2, 17), (2, 18), (2, 19), (2, 20), (2, 21), (2, 22), (2, 23),
 (3, 3), (3, 24), (3, 25), (3, 26), (3, 27), (3, 28), (3, 29), (3, 30),
 (4, 4), (4, 1), (4, 6), (4, 7), (4, 8), (4, 9), (4, 10),
-(5, 5), (5, 2), (5, 3), (5, 4), (5, 5), (5, 6), (5, 7), (5, 8), (5, 9);
+(5, 5), (5, 2), (5, 3), (5, 4), (5, 6), (5, 7), (5, 8), (5, 9);
 
 
