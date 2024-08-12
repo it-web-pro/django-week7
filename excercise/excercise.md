@@ -1,7 +1,7 @@
 # WEEK 7 EXCERCISE
 
 1. สร้าง project ชื่อ `employee_management`
-2. สร้าง database ใหม่ชื่อ `empployee_db`
+2. สร้าง database ใหม่ชื่อ `employee_db`
 4. ให้ทำการ startapp ชื่อ `employee`
 5. ให้ copy code ข้างล่างไปใส่ที่ไฟล์ `employee/models.py`
 
@@ -72,7 +72,7 @@
     ```
 
 6. ให้ทำการ makemigrations และ migrate
-7. ให้นัศึกษา run ไฟล์ employee_db.sql เพื่อ Insert ข้อมูลลง database
+7. ให้นักศึกษา run ไฟล์ employee_db.sql เพื่อ Insert ข้อมูลลง database
 8. ให้นักศึกษาลากโฟลเดอร์ `templates` ใน excercise ไปไว้ที่โฟลเดอร์ `employee` ขอโปรเจคนักศึกษา
     ```
     templates/
@@ -84,20 +84,25 @@
     ```
 
 
-# 1. แสดงผลข้อมูลใน Template
- 1.1 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลของพนักงานทั้งหมดในฐานข้อมูลในไฟล์ employee.html ตามภาพ
+## 1. แสดงผลข้อมูลใน Template
+
+> สำหรับแบบฝึกหัดนี้ให้สร้าง View แบบ "class-based view"
+
+ 1.1 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลของพนักงานทั้งหมดในฐานข้อมูลในไฟล์ employee.html ตามภาพ (0.25 คะแนน)
 
 ![Execer7-1](./images/em1.png)
 
- 1.2 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลของตำแหน่งงาน และแสดงจำนวนของพนักงานในไฟล์ position.html. ตามภาพ
+ 1.2 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลของตำแหน่งงาน และแสดงจำนวนของพนักงานในไฟล์ position.html ตามภาพ (0.25 คะแนน)
 
 ![Execer7-2](./images/po2.png)
 
- 1.3 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลโปรเจคทั้งหมดในไฟล์ project.html ตาทภาพ
+ 1.3 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลโปรเจคทั้งหมดในไฟล์ project.html ตามภาพ (0.25 คะแนน)
 
 ![Execer7-3](./images/pro3.png)
 
- 1.4 กำหนด PATH สำหรับ Navbar ของเว็บไซต่ในไฟล์ nav.html 
+ 1.4 กำหนด PATH สำหรับ Navbar ของเว็บไซต์ในไฟล์ nav.html (0.25 คะแนน)
+
+ **Hint:** ใช้ template tag "url" [Ref](https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#url) 
 
 ```HTML
     <header>
@@ -110,19 +115,17 @@
     </header>
 ```
 
+## 2. ลบ-แก้ไข ข้อมูล
 
-
-# 2. ลบ-แก้ไข ข้อมูล
-
-2.1. จากข้อที่ 1.3 เมื่อกดที่ปุ่ม แก้ไข จะไปหน้าเว็บที่แสดงรายละเอียดของโปคเจคในไฟล์ project_detail.html ตามภาพ
+2.1. จากข้อที่ 1.3 เมื่อกดที่ปุ่ม แก้ไข จะไปหน้าเว็บที่แสดงรายละเอียดของโปคเจคในไฟล์ project_detail.html และให้แสดงข้อมูลของโปรเจคที่ต้องการแก่้ไขตามภาพ (0.25 คะแนน)
 
 ![Execer7-4](./images/prodetail4.png)
 
-2.2 จากข้อที่ 1.3 ให้นักศึกษาสร้าง path สำหรับ ลบโปรเจค และไปแก้ไข function deleteProject(pro_id) ในไฟล์ project.hmtl
+2.2 จากข้อที่ 1.3 ให้นักศึกษาเพิ่ม View สำหรับ ลบโปรเจค และไปแก้ไข url ใน function deleteProject(pro_id) ในไฟล์ project.html (0.5 คะแนน)
 
-2.3 ต่อข้อ 2.1 ให้นักศึกษาสร้าง path สำหรับเพิ่ม พนักงานเข้าไปใน project ด้วยการกรอก ID โดยกำหนดให้ใช้ Method `PUT` และไปแก้ไข function addStaff() ในไฟล์ project_detail.html
+2.3 ต่อข้อ 2.1 ให้นักศึกษาเพิ่ม View สำหรับเพิ่มพนักงานเข้าไปใน project ด้วยการกรอก ID โดยกำหนดให้ใช้ Method `PUT` และไปแก้ไข function addStaff() ในไฟล์ project_detail.html (0.5 คะแนน)
 
-2.4. ต่อข้อ 2.1 ให้นักศึกษาสร้าง path สำหรับเพิ่มลบพนักงานออกจากโปรเจคหลังจากกดปุ่ม Kick this Staff โดยกำหนดให้ใช้ Method `DELETE` และไปแก้ไข function removeStaff(emp_Id) ในไฟล์ project_detail.html
+2.4. ต่อข้อ 2.1 ให้นักศึกษาเพิ่ม View สำหรับลบพนักงานออกจากโปรเจคหลังจากกดปุ่ม Kick this Staff โดยกำหนดให้ใช้ Method `DELETE` และไปแก้ไข function removeStaff(emp_Id) ในไฟล์ project_detail.html (0.25 คะแนน)
 
 # VDO DEMO
 [[demo](https://youtu.be/xIr_FoIuOks)]

@@ -131,6 +131,7 @@ env.bak/
 venv.bak/
 myvenv/
 week7_tutorial/
+employee_management/
 
 # Spyder project settings
 .spyderproject
