@@ -1,4 +1,5 @@
 # WEEK 7 EXCERCISE
+![Execer7-4](./images/ER7.png)
 
 1. สร้าง project ชื่อ `employee_management`
 2. สร้าง database ใหม่ชื่อ `empployee_db`
@@ -123,3 +124,7 @@
 2.3 ต่อข้อ 2.1 ให้นักศึกษาสร้าง path สำหรับเพิ่ม พนักงานเข้าไปใน project ด้วยการกรอก ID โดยกำหนดให้ใช้ Method `PUT` และไปแก้ไข function addStaff() ในไฟล์ project_detail.html
 
 2.4. ต่อข้อ 2.1 ให้นักศึกษาสร้าง path สำหรับเพิ่มลบพนักงานออกจากโปรเจคหลังจากกดปุ่ม Kick this Staff โดยกำหนดให้ใช้ Method `DELETE` และไปแก้ไข function removeStaff(emp_Id) ในไฟล์ project_detail.html
+
+
+## VDO DEMO
+[demo](https://youtu.be/xIr_FoIuOks)
