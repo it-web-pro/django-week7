@@ -155,7 +155,7 @@ def detail(request, question_id):
     question = Question.objects.get(pk=question_id)
     return render(request, "detail.html", {
         "question": question,
-        "choices": question.choice_set.all()
+        "choices": question.choice_set.all().order_by("choice_text")
     })
 
 def vote(request, question_id):
@@ -164,7 +164,7 @@ def vote(request, question_id):
     if request.method == "GET":
         return render(request, "vote.html", {
             "question": question,
-            "choices": question.choice_set.all()
+            "choices": question.choice_set.all().order_by("choice_text")
         })
     elif request.method == "POST":
         choice_id = request.POST.get('choice')
