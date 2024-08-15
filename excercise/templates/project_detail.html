@@ -154,16 +154,15 @@
 <script>
     function addStaff(){
         const emp = document.getElementById('input-add-staff');
-        const data = {emp_id: emp.value};
+        const emp_id = emp.value;
         
         // กำหนด path ให้ถูกต้อง
-        fetch(`/api/example/${id}/`, {
+        fetch(`/api/example/{{project.id}}/${emp_id}/`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': '{{ csrf_token }}'
-            },
-            body: JSON.stringify(data)
+            }
         })
         .then(response => response.json())
         .then(data => {
@@ -173,10 +172,10 @@
         .catch(error => console.error('Error:', error));
     }
 
-    async function removeStaff(emp_Id){
+    async function removeStaff(emp_id){
 
         // กำหนด path ให้ถูกต้อง
-        fetch(`/api/example/${emp_Id}/`, {
+        fetch(`/api/example/{{project.id}}/${emp_id}/`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
