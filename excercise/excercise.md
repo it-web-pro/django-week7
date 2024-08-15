@@ -128,5 +128,15 @@
 
 2.4. ต่อข้อ 2.1 ให้นักศึกษาสร้าง path สำหรับเพิ่มลบพนักงานออกจากโปรเจคหลังจากกดปุ่ม Kick this Staff โดยกำหนดให้ใช้ Method `DELETE` และไปแก้ไข function removeStaff(emp_Id) ในไฟล์ project_detail.html
 
+**Hint:** สำหรับข้อ 2.3 และ 2.4 เนื่องจากเรามีการแนบ JSON มาใน body ของ request ใน view จะต้องทำการแปลง JSON เป็น dictionary ก่อน เช่น
+
+```python
+import json
+...
+data = json.loads(request.body)
+emp_id = data.get("emp_id")
+...
+```
+
 ## Demo
 https://youtu.be/xIr_FoIuOks
