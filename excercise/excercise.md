@@ -1,109 +1,125 @@
 # WEEK 7 EXCERCISE
-![Execer7-4](./images/ER7.png)
 
-1. สร้าง project ชื่อ `employee_management`
-2. สร้าง database ใหม่ชื่อ `employee_db`
-4. ให้ทำการ startapp ชื่อ `employee`
-5. ให้ copy code ข้างล่างไปใส่ที่ไฟล์ `employee/models.py`
+![Execer7-4](./images/ER.svg)
 
-    ``` PYTHON
-    class Employee(models.Model):
-        class Gender(models.Choices):
-            M = "M"
-            F = "F"
-            LGBT = "LGBT"
-            
-        first_name = models.CharField(max_length=155)
-        last_name = models.CharField(max_length=155)
-        gender = models.CharField(max_length=10, choices=Gender.choices)
-        birth_date = models.DateField()
-        hire_date = models.DateField()
-        salary = models.DecimalField(default=0, max_digits=10, decimal_places=2)
-        position = models.ForeignKey(
-            "employee.Position", 
-            on_delete=models.SET_NULL, 
-            null=True, 
-            blank=True
-        )
-        
-        def get_full_name(self):
-            return f"{self.first_name} {self.last_name}"
+1. สร้าง project ชื่อ `kmitl`
 
-    class EmployeeAddress(models.Model):
-        employee = models.OneToOneField("employee.Employee", on_delete=models.PROTECT)
-        location = models.TextField(null=True, blank=True)
-        district = models.CharField(max_length=100)
-        province = models.CharField(max_length=100)
-        postal_code = models.CharField(max_length=15)
-        
-        
-    class Department(models.Model):
-        name = models.CharField(max_length=155)
-        manager = models.OneToOneField(
-            "employee.Employee", 
-            on_delete=models.SET_NULL, 
-            null=True, 
-            blank=True
-        )
-        
-    class Position(models.Model):
-        name = models.CharField(max_length=155)
-        description = models.TextField(null=True, blank=True)
-        department = models.ForeignKey(
-            "employee.Department",
-            on_delete=models.SET_NULL, 
-            null=True, 
-            blank=True
-        )
+2. สร้าง database ใหม่ชื่อ `kmitl`
 
-    class Project(models.Model):
-        name = models.CharField(max_length=255)
-        description = models.TextField(null=True, blank=True)
-        manager = models.OneToOneField(
-            "employee.Employee", 
-            on_delete=models.SET_NULL, 
-            null=True, 
-            blank=True,
-            related_name="project_mamager"
-        )
-        due_date = models.DateField()
-        start_date = models.DateField()
-        staff = models.ManyToManyField("employee.Employee")
-        
-    ```
+3. ให้ทำการ startapp ชื่อ `registeration`
 
-6. ให้ทำการ makemigrations และ migrate
-7. ให้นักศึกษา run ไฟล์ employee_db.sql เพื่อ Insert ข้อมูลลง database
-8. ให้นักศึกษาลากโฟลเดอร์ `templates` ใน excercise ไปไว้ที่โฟลเดอร์ `employee` ขอโปรเจคนักศึกษา
-    ```
-    templates/
-        - employee.hmtl
-        - nav.html
-        - position.html
-        - project_detail.html
-        - project.html
-    ```
+4. ให้ copy code ข้างล่างไปใส่ที่ไฟล์ `registeration/models.py`
 
+```PYTHON
+from django.db import models
+
+
+class Faculty(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    code = models.CharField(max_length=10, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Professor(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    faculty = models.ForeignKey(Faculty, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
+
+class Course(models.Model):
+    course_code = models.CharField(max_length=20, unique=True)
+    course_name = models.CharField(max_length=200)
+    credits = models.PositiveSmallIntegerField()
+
+    def __str__(self):
+        return f"{self.course_code} {self.course_name}"
+
+
+class Section(models.Model):
+    class DayOfWeek(models.TextChoices):
+        MONDAY = "MON", "จันทร์"
+        TUESDAY = "TUE", "อังคาร"
+        WEDNESDAY = "WED", "พุธ"
+        THURSDAY = "THU", "พฤหัสบดี"
+        FRIDAY = "FRI", "ศุกร์"
+
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    section_number = models.CharField(max_length=3)
+    semester = models.CharField(max_length=10)
+    professor = models.ForeignKey(
+        Professor, on_delete=models.SET_NULL, null=True, blank=True
+    )
+    day_of_week = models.CharField(max_length=3, choices=DayOfWeek.choices)
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    capacity = models.PositiveSmallIntegerField(default=60)
+
+    def __str__(self):
+        return f"{self.course.course_code} ({self.section_number}) - {self.semester})"
+
+
+class Student(models.Model):
+    student_id = models.CharField(max_length=10, unique=True)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    faculty = models.ForeignKey(Faculty, on_delete=models.PROTECT)
+    # ความสัมพันธ์จะถูกย้ายมาอยู่ที่นี่
+    enrolled_sections = models.ManyToManyField(Section, blank=True)
+
+    def __str__(self):
+        return f"{self.student_id} - {self.first_name}"
+
+
+class StudentProfile(models.Model):
+    student = models.OneToOneField(Student, on_delete=models.CASCADE, primary_key=True)
+    email = models.EmailField(unique=True)
+    phone_number = models.CharField(max_length=15, blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"Profile of {self.student.first_name}"
+
+```
+
+5. ให้ทำการ makemigrations และ migrate
+
+6. ให้นักศึกษา run ไฟล์ kmitl_db.sql เพื่อ Insert ข้อมูลลง database
+
+7. ให้นักศึกษาลากโฟลเดอร์ `templates` ใน excercise ไปไว้ที่โฟลเดอร์ `registeration` ขอโปรเจคนักศึกษา
+
+```sh
+templates/
+    - employee.hmtl
+    - nav.html
+    - position.html
+    - project_detail.html
+    - project.html
+```
 
 ## 1. แสดงผลข้อมูลใน Template
 
 > สำหรับแบบฝึกหัดนี้ให้สร้าง View แบบ "class-based view"
 
- 1.1 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลของพนักงานทั้งหมดในฐานข้อมูลในไฟล์ employee.html ตามภาพ (0.25 คะแนน)
+1.1 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลของพนักงานทั้งหมดในฐานข้อมูลในไฟล์ employee.html ตามภาพ (0.25 คะแนน)
 
 ![Execer7-1](./images/em1.png)
 
- 1.2 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลของตำแหน่งงาน และแสดงจำนวนของพนักงานในไฟล์ position.html ตามภาพ (0.25 คะแนน)
+1.2 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลของตำแหน่งงาน และแสดงจำนวนของพนักงานในไฟล์ position.html ตามภาพ (0.25 คะแนน)
 
 ![Execer7-2](./images/po2.png)
 
- 1.3 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลโปรเจคทั้งหมดในไฟล์ project.html ตามภาพ (0.25 คะแนน)
+1.3 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลโปรเจคทั้งหมดในไฟล์ project.html ตามภาพ (0.25 คะแนน)
 
 ![Execer7-3](./images/pro3.png)
 
- 1.4 กำหนด PATH สำหรับ Navbar ของเว็บไซต์ในไฟล์ nav.html (0.25 คะแนน)
+1.4 กำหนด PATH สำหรับ Navbar ของเว็บไซต์ในไฟล์ nav.html (0.25 คะแนน)
 
- **Hint:** ใช้ template tag "url" [Ref](https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#url) 
+**Hint:** ใช้ template tag "url" [Ref](https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#url)
 
 ```HTML
     <header>
@@ -142,4 +158,5 @@ class MyView(View):
 ```
 
 ## Demo
+
 https://youtu.be/xIr_FoIuOks
