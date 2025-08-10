@@ -94,11 +94,11 @@ class StudentProfile(models.Model):
 
 ```sh
 templates/
-    - employee.hmtl
+    - index.hmtl
     - nav.html
-    - position.html
-    - project_detail.html
-    - project.html
+    - professor.html
+    - course.html
+    - faculty.html
 ```
 
 ## 1. แสดงผลข้อมูลใน Template
