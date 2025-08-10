@@ -61,6 +61,10 @@ class Section(models.Model):
 
     def __str__(self):
         return f"{self.course.course_code} ({self.section_number}) - {self.semester})"
+        
+    def dayOfWeek(self):
+        weekday = {"MON": 0, "TUE": 1, "WED": 2, "THU": 3, "FRI": 4}
+        return weekday[self.day_of_week]
 
 
 class Student(models.Model):
