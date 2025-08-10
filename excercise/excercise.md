@@ -177,30 +177,95 @@ templates/
 
     ![Execer1-5-(course)](./images/pro5_course.png)
 
-## 2. ลบ-แก้ไข ข้อมูล
+## 2. เพิ่ม-ลบ-แก้ไข ข้อมูล
 
-2.1. จากข้อที่ 1.3 เมื่อกดที่ปุ่ม แก้ไข จะไปหน้าเว็บที่แสดงรายละเอียดของโปคเจคในไฟล์ project_detail.html และให้แสดงข้อมูลของโปรเจคที่ต้องการแก่้ไขตามภาพ (0.25 คะแนน)
+2.1. จากหน้า Student ให้นักศึกษาเพิ่มปุ่มสำหรับเพิ่มข้อมูลนักศึกษาดังรูปโดยมันจะต้องกดแล้วไปที่ url สำหรับสร้างข้อมูล จากนั้นทำการเพิ่ม View โดยกำหนดให้ใช้ Method `POST` และใช้ไฟล์ create_student.html (แก้ไข url ในไฟล์ให้ถูกต้อง)
+- ปุ่ม create student
+![Execer7-4](./images/pro5_student_create_btn.png)
+- หน้าสร้างข้อมูลนักศึกษา
+![Execer7-4](./images/pro5_student_create_page.png)
 
-![Execer7-4](./images/prodetail4.png)
+2.2 จากข้อ 1.1 ให้นักศึกษาแก้ไขโค้ดดังนี้ในไฟล์ index.html จากนั้นทำการเพิ่ม View สำหรับลบข้อมูลโดยต้องใช้ method delete
 
-2.2 จากข้อที่ 1.3 ให้นักศึกษาเพิ่ม View สำหรับ ลบโปรเจค และไปแก้ไข url ใน function deleteProject(pro_id) ในไฟล์ project.html (0.25 คะแนน)
+```html
+<tr>
+    <th class="px-4 py-3">Student ID</th>
+    <th class="px-4 py-3">Full Name</th>
+    <th class="px-4 py-3">Email</th>
+    <th class="px-4 py-3">Phone nuber</th>
+    <th class="px-4 py-3">Faculty</th>
+    <th class="px-4 py-3">Registration Section</th>
+    <th class="px-4 py-3 text-right">Actions</th>
+</tr>
 
-2.3 ต่อข้อ 2.1 ให้นักศึกษาเพิ่ม View สำหรับเพิ่มพนักงานเข้าไปใน project ด้วยการกรอก ID โดยกำหนดให้ใช้ Method `PUT` และไปแก้ไข function addStaff() ในไฟล์ project_detail.html (0.5 คะแนน)
+...
 
-2.4. ต่อข้อ 2.1 ให้นักศึกษาสร้าง path สำหรับเพิ่มลบพนักงานออกจากโปรเจคหลังจากกดปุ่ม Kick this Staff โดยกำหนดให้ใช้ Method `DELETE` และไปแก้ไข function removeStaff(emp_Id) ในไฟล์ project_detail.html (0.5 คะแนน)
-
-**Hint:** สำหรับข้อ 2.2 - 2.4 เราสามารถส่ง response เป็น json ได้โดยใช้ JsonResponse
-
-```python
-from django.views import View
-from django.http import JsonResponse
-
-class MyView(View):
-
-    def get(self, request):
-        # Do what you view needs to do
-        return JsonResponse({'foo':'bar'}, status=200)
+<tr class="hover:bg-orange-50 transition">
+    <td class="px-4 py-3">{{ }}</td>
+    <td class="px-4 py-3 font-medium">{{ }} {{ }}</td>
+    <td class="px-4 py-3">{{ }}</td>
+    <td class="px-4 py-3">{{ }}</td>
+    <td class="px-4 py-3">{{ }}</td>
+    <td class="px-4 py-3">
+        {% if student.enrolled_sections.count %}
+        {% for section in student.enrolled_sections.all|sortSectionByDayOfWeek|dictsort:'day_of_week_num' %}
+            {{ }}
+            ({{ }}) - {{ }}
+            {{ }}-{{ }}<br />
+        {% endfor %}
+        {% else %}
+        -
+        {% endif %}
+    </td>
+    <td>
+        <button onclick="deleteStudent({{  }})"
+                class="px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600">
+            Delete
+        </button>
+    </td>
+</tr>
 ```
+
+จากนั้นเพิ่ม script
+``` html
+<script>
+async function deleteStudent(studentId) {
+  if (!confirm('ยืนยันลบนักศึกษา?')) return;
+
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+  const res = await fetch(`/registration/student/${studentId}/delete/`, {
+    method: 'DELETE',
+    headers: {
+      'X-CSRFToken': csrftoken
+    }
+  });
+
+  if (res) {
+    window.location.reload();
+  } else {
+    alert('ลบไม่สำเร็จ');
+  }
+}
+</script>
+```
+
+2.3 ให้นักศึกษาเพิ่ม View สำหรับแก้ไขข้อมูลโดยต้องเพิ่มปุ่ม edit เข้าไปเหมือนปุ่ม delete โดยแก้ไขโค้ดที่ index.html ดังนี้
+
+```html
+<td>
+    <a href="/registration/student/{{  }}/edit/" class="px-3 py-1 rounded bg-orange-500 text-white hover:bg-orange-600">
+        Edit
+    </a>
+    <button onclick="deleteStudent({{  }})"
+            class="px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600">
+        Delete
+    </button>
+</td>
+```
+จากนั้นให้ใช้ไฟล์ edit_student.html ในการแก้ไขข้อมูล
+
+**Hint:** ใน View ให้ใช้ json.loads(request.body) เพราะในไฟล์ edit_student.html ฟังก์ชัน handleUpdate มีการแนบ payload ไปเป็น json
 
 ## Demo
 
