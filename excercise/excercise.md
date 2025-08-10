@@ -6,9 +6,9 @@
 
 2. สร้าง database ใหม่ชื่อ `kmitl`
 
-3. ให้ทำการ startapp ชื่อ `registeration`
+3. ให้ทำการ startapp ชื่อ `registration`
 
-4. ให้ copy code ข้างล่างไปใส่ที่ไฟล์ `registeration/models.py`
+4. ให้ copy code ข้างล่างไปใส่ที่ไฟล์ `registration/models.py`
 
 ```PYTHON
 from django.db import models
@@ -90,34 +90,38 @@ class StudentProfile(models.Model):
 
 6. ให้นักศึกษา run ไฟล์ kmitl_db.sql เพื่อ Insert ข้อมูลลง database
 
-7. ให้นักศึกษาลากโฟลเดอร์ `templates` ใน excercise ไปไว้ที่โฟลเดอร์ `registeration` ขอโปรเจคนักศึกษา
+7. ให้นักศึกษาลากโฟลเดอร์ `templates` และ `templatetags` ใน excercise ไปไว้ที่โฟลเดอร์ `registration` ขอโปรเจคนักศึกษา
 
 ```sh
 templates/
-    - employee.hmtl
+    - index.hmtl
     - nav.html
-    - position.html
-    - project_detail.html
-    - project.html
+    - professor.html
+    - course.html
+    - faculty.html
 ```
 
 ## 1. แสดงผลข้อมูลใน Template
 
 > สำหรับแบบฝึกหัดนี้ให้สร้าง View แบบ "class-based view"
 
-1.1 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลของพนักงานทั้งหมดในฐานข้อมูลในไฟล์ employee.html ตามภาพ (0.25 คะแนน)
+1.1 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลของพนักงานทั้งหมดในฐานข้อมูลในไฟล์ index.html ตามภาพ (0.25 คะแนน)
 
-![Execer7-1](./images/em1.png)
+![Execer7-1](./images/student.png)
 
-1.2 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลของตำแหน่งงาน และแสดงจำนวนของพนักงานในไฟล์ position.html ตามภาพ (0.25 คะแนน)
+1.2 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลของตำแหน่งงาน และแสดงจำนวนของพนักงานในไฟล์ professor.html ตามภาพ (0.25 คะแนน)
 
-![Execer7-2](./images/po2.png)
+![Execer7-2](./images/professor.png)
 
-1.3 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลโปรเจคทั้งหมดในไฟล์ project.html ตามภาพ (0.25 คะแนน)
+1.3 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลโปรเจคทั้งหมดในไฟล์ course.html ตามภาพ (0.25 คะแนน)
 
-![Execer7-3](./images/pro3.png)
+![Execer7-3](./images/course.png)
 
-1.4 กำหนด PATH สำหรับ Navbar ของเว็บไซต์ในไฟล์ nav.html (0.25 คะแนน)
+1.4 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลโปรเจคทั้งหมดในไฟล์ faculty.html ตามภาพ (0.25 คะแนน)
+
+![Execer7-4](./images/faculty.png)
+
+1.5 กำหนด PATH สำหรับ Navbar ของเว็บไซต์ในไฟล์ nav.html (0.25 คะแนน)
 
 **Hint:** ใช้ template tag "url" [Ref](https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#url)
 
@@ -125,12 +129,49 @@ templates/
     <header>
         <nav>
             <!-- กำหนด path  -->
-            <a href="/">Project</a>
-            <a href="/">Employee</a>
-            <a href="/">Position</a>
+            <a href="/">Professor</a>
+            <a href="/">Student</a>
+            <a href="/">Faculty</a>
+            <a href="/">Course</a>
         </nav>
     </header>
 ```
+
+1.5 ให้นักศึกษาเขียนให้ Quick Search ในทุก ๆ หน้า
+
+**Hint:** ใช้ request.GET.get("key_param") เพื่อให้สามารถดึงข้อมูล Param จาก URLs ได้
+
+- หน้า Student: สามารถเลือก `Field` ที่จะ `Filter` ได้ โดยเมื่อ Input แล้วนำข้อมูลที่กรอกไปใช้ โดยขอแค่อยู่ภายใน `Field` ที่เลือก และไม่สนตัวเล็กและตัวใหญ่
+
+  - Full Name (Default)
+
+    ![Execer1-5-(student)Full Name](./images/pro5_student_full_name.png)
+
+  - Email
+
+    ![Execer1-5-(student)Email](./images/pro5_student_email.png)
+
+  - Faculty
+
+    ![Execer1-5-(student)Faculty](./images/pro5_student_faculty.png)
+
+- หน้า Professor: สามารถเลือก `Field` ที่จะ `Filter` ได้ โดยเมื่อ Input แล้วนำข้อมูลที่กรอกไปใช้ โดยขอแค่อยู่ภายใน `Field` ที่เลือก และไม่สนตัวเล็กและตัวใหญ่
+
+  - Full Name (Default)
+
+    ![Execer1-5-(professor)Full Name](./images/pro5_professor_full_name.png)
+
+  - Faculty
+
+    ![Execer1-5-(professor)Faculty](./images/pro5_professor_faculty.png)
+
+- หน้า Faculty: เมื่อ Input แล้วนำข้อมูลที่กรอกไปใช้ `Filter` ชื่อ ขอแค่ข้อมูลอยู่ภายใน และไม่สนตัวเล็กตัวใหญ่
+
+    ![Execer1-5-(faculty)](./images/pro5_faculty.png)
+
+- หน้า Course: เมื่อ Input แล้วนำข้อมูลที่กรอกไปใช้ `Filter` ชื่อ ขอแค่ข้อมูลอยู่ภายใน และไม่สนตัวเล็กตัวใหญ่
+
+    ![Execer1-5-(course)](./images/pro5_course.png)
 
 ## 2. ลบ-แก้ไข ข้อมูล
 

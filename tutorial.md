@@ -139,7 +139,7 @@ TEMPLATE_DIRS = (
 เปิด browser และพิมพ์ url `http://127.0.0.1:8000/polls/`
 จะเห็นว่ามีรายการ questions แสดงขึ้นมา 5 รายการ
 
-เรามาทำให้ view อื่นๆ ใช้งานได้่กัน
+เรามาทำให้ view อื่นๆ ใช้งานได้กัน
 
 ```python
 from django.shortcuts import render, redirect
@@ -222,6 +222,55 @@ def vote(request, question_id):
 ```
 
 ## Let's try class-based views
+
+### Class-based views คืออะไร?
+
+Class-based view นั้นโดยหลักแล้วจะมีไว้เพื่อให้เราสามารถกำหนด response สำหรับ HTTP request method ที่แตกต่างกันได้ แทนที่จะต้องมาใช้ if ดังเช่นในกรณี function-based view
+
+```python
+from django.http import HttpResponse
+
+
+def my_view(request):
+    if request.method == "GET":
+        # <view logic>
+        return HttpResponse("result")
+    elif request.method == "POST":
+        # <view logic>
+        return HttpResponse(status=201)
+```
+
+แต่ถ้าเป็น class-based view จะเขียนได้ดังนี้ ซึ่งจะเห็นว่ามีการแยก method ใน `MyView` ตาม HTTP METHOD (GET and POST) เป็นสัดส่วน ไม่ต้อง if ... elif ... เหมือนใน function-based views
+
+```python
+from django.http import HttpResponse
+from django.views import View
+
+
+class MyView(View):
+    def get(self, request):
+        # <view logic>
+        return HttpResponse("result")
+    
+    def post(self, request):
+        # <view logic>
+        return HttpResponse(status=201)
+```
+
+ในกรณีที่ใช้ class-based view ในไฟล์ urls.py จะต้องปรับนิดหน่อย โดยจะต้องเรียก `as_view()`
+
+```python
+# urls.py
+from django.urls import path
+from myapp.views import MyView
+
+urlpatterns = [
+    path("about/", MyView.as_view()),
+]
+```
+
+______
+
 
 เรามาลองเปลี่ยนเป็น class-based views กันบ้างนะครับ จะเห็นว่า code เป็นระเบียบขึ้น (ผมคิดว่านะ...)
 

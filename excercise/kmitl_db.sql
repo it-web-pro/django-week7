@@ -8,12 +8,12 @@
 -- -------------------------------------------------------------
 
 
-INSERT INTO "public"."registeration_faculty" ("id", "name", "code") VALUES
+INSERT INTO "public"."registration_faculty" ("id", "name", "code") VALUES
 (1, 'Faculty of Engineering', '01'),
 (2, 'Faculty of Information Technology', '07'),
 (3, 'Faculty of Science', '05');
 
-INSERT INTO "public"."registeration_professor" ("id", "first_name", "last_name", "faculty_id") VALUES
+INSERT INTO "public"."registration_professor" ("id", "first_name", "last_name", "faculty_id") VALUES
 (1, 'John', 'Smith', 1),
 (2, 'Mary', 'Jane', 1),
 (3, 'Peter', 'Jones', 2),
@@ -21,7 +21,7 @@ INSERT INTO "public"."registeration_professor" ("id", "first_name", "last_name",
 (5, 'David', 'Wilson', 3),
 (6, 'Linda', 'Garcia', 3);
 
-INSERT INTO "public"."registeration_course" ("id", "course_code", "course_name", "credits") VALUES
+INSERT INTO "public"."registration_course" ("id", "course_code", "course_name", "credits") VALUES
 (1, '01006011', 'General Chemistry', 3),
 (2, '04006001', 'Calculus I', 3),
 (3, '01076001', 'Computer Programming', 3),
@@ -33,7 +33,7 @@ INSERT INTO "public"."registeration_course" ("id", "course_code", "course_name",
 (9, '04026001', 'General Physics I', 3),
 (10, '01076114', 'Database Systems', 3);
 
-INSERT INTO "public"."registeration_section" ("id", "section_number", "semester", "day_of_week", "start_time", "end_time", "capacity", "course_id", "professor_id") VALUES
+INSERT INTO "public"."registration_section" ("id", "section_number", "semester", "day_of_week", "start_time", "end_time", "capacity", "course_id", "professor_id") VALUES
 (1, '101', '1/2568', 'MON', '09:00:00', '12:00:00', 60, 1, 5),
 (2, '101', '1/2568', 'TUE', '09:00:00', '12:00:00', 70, 2, 6),
 (3, '102', '1/2568', 'THU', '13:00:00', '16:00:00', 70, 2, 6),
@@ -46,7 +46,7 @@ INSERT INTO "public"."registeration_section" ("id", "section_number", "semester"
 (10, '201', '1/2568', 'WED', '09:00:00', '12:00:00', 60, 4, 3),
 (11, '201', '1/2568', 'THU', '09:00:00', '12:00:00', 60, 10, 4);
 
-INSERT INTO "public"."registeration_student" ("id", "student_id", "first_name", "last_name", "faculty_id") VALUES
+INSERT INTO "public"."registration_student" ("id", "student_id", "first_name", "last_name", "faculty_id") VALUES
 (1, '67010111', 'Somchai', 'Lertprasert', 1),
 (2, '67010112', 'Areeya', 'Charoensuk', 1),
 (3, '67070221', 'Anucha', 'Saetang', 2),
@@ -68,7 +68,7 @@ INSERT INTO "public"."registeration_student" ("id", "student_id", "first_name", 
 (19, '66017890', 'Sakda', 'Ngamdee', 1),
 (20, '66079876', 'Wanna', 'Jaroen', 2);
 
-INSERT INTO "public"."registeration_student_enrolled_sections" ("id", "student_id", "section_id") VALUES
+INSERT INTO "public"."registration_student_enrolled_sections" ("id", "student_id", "section_id") VALUES
 (50, 1, 2),
 (51, 1, 4),
 (52, 1, 6),
@@ -119,7 +119,7 @@ INSERT INTO "public"."registeration_student_enrolled_sections" ("id", "student_i
 (97, 20, 9),
 (98, 20, 11);
 
-INSERT INTO "public"."registeration_studentprofile" ("student_id", "email", "phone_number", "address") VALUES
+INSERT INTO "public"."registration_studentprofile" ("student_id", "email", "phone_number", "address") VALUES
 (1, '67010111@kmitl.ac.th', '081-111-1111', '123 Rama IV Rd, Bangkok'),
 (2, '67010112@kmitl.ac.th', '081-222-2222', '456 Sukhumvit Rd, Bangkok'),
 (3, '67070221@kmitl.ac.th', '081-333-3333', '789 Silom Rd, Bangkok'),

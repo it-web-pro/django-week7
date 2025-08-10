@@ -6,7 +6,7 @@
 
 [Django document](https://docs.djangoproject.com/en/5.0/topics/http/urls/)
 
-เคยเจอ website ที่มี URL path ยาวๆ และอ่านไม่รู้เรื่องไหมครับ website ที่ดีึควรมี URL path ที่อ่านรู้เรื่อง และ ไม่ยาวจนเกินไป ในหัวข้อนี้เราจะเรียนรู้เกี่ยวกับการออกแบบและกำหนด URL path ใน project Django กันนะครับ
+เคยเจอ website ที่มี URL path ยาวๆ และอ่านไม่รู้เรื่องไหมครับ website ที่ดีควรมี URL path ที่อ่านรู้เรื่อง และ ไม่ยาวจนเกินไป ในหัวข้อนี้เราจะเรียนรู้เกี่ยวกับการออกแบบและกำหนด URL path ใน project Django กันนะครับ
 
 ## How Django processes a request
 
@@ -30,7 +30,7 @@ urlpatterns = [
 - แต่ว่า `/articles/2003` จะไม่ match เลยเพราะไม่มี '/'
 - ส่วน `/articles/2003/03/building-a-django-site/` จะ match path สุดท้าย ซึ่งเรียก "views.article_detail"
 
-**Note: ไม่จำเป็นจะต้องมี / ตอนต้นของ path**
+**Note: ไม่จำเป็นจะต้องมี / ตอนต้นของ path และควรปิดท้ายด้วย / เสมอ**
 
 ## Path converters
 
