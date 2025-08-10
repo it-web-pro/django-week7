@@ -1,114 +1,31 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-around;
-            background-color: #466bff;
-            color: white;
-            padding: 20px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-        }
-
-        main {
-            padding: 20px;
-        }
-
-        .head {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .head .action {
-            display: flex;
-            gap: 10px;
-        }
-
-        .itemGroup {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            padding: 10px;
-        }
-
-        .item {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-
-        .item .action {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        button,
-        .btn {
-            padding: 10px 15px;
-            background-color: #466bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 13px;
-            text-decoration: none;
-        }
-
-        .btn.edit,
-        button.edit {
-            background-color: #f39c12;
-        }
-
-        .btn.delete,
-        button.delete {
-            background-color: #e74c3c;
-        }
-
-        input,
-        select,
-        textarea {
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-
-        .form {
-            display: flex;
-            gap: 10px;
-            flex-direction: column;
-            padding: 10px;
-        }
-
-        .form input {
-            width: 100%;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<div>
-    <header>
-        <nav>
-            <!-- กำหนด path  -->
-            <a href="/">Project</a>
-            <a href="/">Employee</a>
-            <a href="/">Position</a>
-        </nav>
-    </header>
-</div>
+<body class="bg-gray-50 text-gray-800">
+
+  <header class="top-0 left-0 w-full bg-blue-600 text-white shadow-lg z-50">
+    <nav class="max-w-8xl mx-auto flex justify-between items-center px-6 py-4">
+      <div class="flex items-center gap-6 font-semibold">
+        
+        <a href="{% url 'student_page' %}" class="text-2xl font-bold text-white hover:text-blue-200 transition select-none">
+          MyDjangoApp
+        </a>
+
+        <a href="/" class="hover:text-blue-200 transition">Professor</a>
+        <a href="/" class="hover:text-blue-200 transition">Student</a>
+        <a href="/" class="hover:text-blue-200 transition">Faculty</a>
+        <a href="/" class="hover:text-blue-200 transition">Course</a>
+      </div>
+
+      <div>
+        <span class="text-sm text-blue-100">Welcome, Admin</span>
+      </div>
+    </nav>
+  </header>
+
+</body>
 </html>

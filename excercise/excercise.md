@@ -105,19 +105,23 @@ templates/
 
 > สำหรับแบบฝึกหัดนี้ให้สร้าง View แบบ "class-based view"
 
-1.1 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลของพนักงานทั้งหมดในฐานข้อมูลในไฟล์ employee.html ตามภาพ (0.25 คะแนน)
+1.1 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลของพนักงานทั้งหมดในฐานข้อมูลในไฟล์ index.html ตามภาพ (0.25 คะแนน)
 
-![Execer7-1](./images/em1.png)
+![Execer7-1](./images/student.png)
 
-1.2 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลของตำแหน่งงาน และแสดงจำนวนของพนักงานในไฟล์ position.html ตามภาพ (0.25 คะแนน)
+1.2 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลของตำแหน่งงาน และแสดงจำนวนของพนักงานในไฟล์ professor.html ตามภาพ (0.25 คะแนน)
 
-![Execer7-2](./images/po2.png)
+![Execer7-2](./images/professor.png)
 
-1.3 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลโปรเจคทั้งหมดในไฟล์ project.html ตามภาพ (0.25 คะแนน)
+1.3 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลโปรเจคทั้งหมดในไฟล์ course.html ตามภาพ (0.25 คะแนน)
 
-![Execer7-3](./images/pro3.png)
+![Execer7-3](./images/course.png)
 
-1.4 กำหนด PATH สำหรับ Navbar ของเว็บไซต์ในไฟล์ nav.html (0.25 คะแนน)
+1.4 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลโปรเจคทั้งหมดในไฟล์ faculty.html ตามภาพ (0.25 คะแนน)
+
+![Execer7-4](./images/faculty.png)
+
+1.5 กำหนด PATH สำหรับ Navbar ของเว็บไซต์ในไฟล์ nav.html (0.25 คะแนน)
 
 **Hint:** ใช้ template tag "url" [Ref](https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#url)
 
@@ -125,9 +129,10 @@ templates/
     <header>
         <nav>
             <!-- กำหนด path  -->
-            <a href="/">Project</a>
-            <a href="/">Employee</a>
-            <a href="/">Position</a>
+             <a href="/">Professor</a>
+            <a href="/">Student</a>
+            <a href="/">Faculty</a>
+            <a href="/">Course</a>
         </nav>
     </header>
 ```
