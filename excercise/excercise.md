@@ -109,25 +109,25 @@ templates/
 
 > สำหรับแบบฝึกหัดนี้ให้สร้าง View แบบ "class-based view"
 
-1.1 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลของพนักงานทั้งหมดในฐานข้อมูลในไฟล์ index.html ตามภาพ (0.25 คะแนน)
+1.1 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลของพนักงานทั้งหมดในฐานข้อมูลในไฟล์ index.html ตามภาพ (0.2 คะแนน)
 
-![Execer7-1](./images/student.png)
+![EX1-1](./images/student.png)
 
-1.2 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลของตำแหน่งงาน และแสดงจำนวนของพนักงานในไฟล์ professor.html ตามภาพ (0.25 คะแนน)
+1.2 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลของตำแหน่งงาน และแสดงจำนวนของพนักงานในไฟล์ professor.html ตามภาพ (0.2 คะแนน)
 
-![Execer7-2](./images/professor.png)
+![EX1-2](./images/professor.png)
 
-1.3 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลโปรเจคทั้งหมดในไฟล์ course.html ตามภาพ (0.25 คะแนน)
+1.3 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลโปรเจคทั้งหมดในไฟล์ course.html ตามภาพ (0.2 คะแนน)
 
-![Execer7-3](./images/course.png)
+![EX1-3](./images/course.png)
 
-1.4 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลโปรเจคทั้งหมดในไฟล์ faculty.html ตามภาพ (0.25 คะแนน)
+1.4 ให้นักศึกษาสร้าง View และกำหนด URL ให้แสดงข้อมูลโปรเจคทั้งหมดในไฟล์ faculty.html ตามภาพ (0.2 คะแนน)
 
-![Execer7-4](./images/faculty.png)
+![EX1-4](./images/faculty.png)
 
-1.5 กำหนด PATH สำหรับ Navbar ของเว็บไซต์ในไฟล์ nav.html (0.25 คะแนน)
+1.5 กำหนด PATH สำหรับ Navbar ของเว็บไซต์ในไฟล์ nav.html (0.2 คะแนน)
 
-**Hint:** ใช้ template tag "url" [Ref](https://docs.djangoproject.com/en/5.0/ref/templates/builtins/#url)
+**Hint:** ใช้ template tag `url` - [Ref](https://docs.djangoproject.com/en/5.2/ref/templates/builtins/#url)
 
 ```HTML
     <header>
@@ -141,132 +141,46 @@ templates/
     </header>
 ```
 
-1.5 ให้นักศึกษาเขียนให้ Quick Search ในทุก ๆ หน้า
+1.6 ให้นักศึกษาเขียนให้ Quick Search ในทุก ๆ หน้า
 
 **Hint:** ใช้ request.GET.get("key_param") เพื่อให้สามารถดึงข้อมูล Param จาก URLs ได้
 
-- หน้า Student: สามารถเลือก `Field` ที่จะ `Filter` ได้ โดยเมื่อ Input แล้วนำข้อมูลที่กรอกไปใช้ โดยขอแค่อยู่ภายใน `Field` ที่เลือก และไม่สนตัวเล็กและตัวใหญ่
+- หน้า Student: สามารถเลือก `Field` ที่จะ `Filter` ได้ โดยเมื่อ Input แล้วนำข้อมูลที่กรอกไปใช้ โดยขอแค่อยู่ภายใน `Field` ที่เลือก และไม่สนตัวเล็กและตัวใหญ่ (0.5 คะแนน)
 
   - Full Name (Default)
 
-    ![Execer1-5-(student)Full Name](./images/pro5_student_full_name.png)
+    ![EX1-6-1](./images/pro5_student_full_name.png)
 
   - Email
 
-    ![Execer1-5-(student)Email](./images/pro5_student_email.png)
+    ![EX1-6-2](./images/pro5_student_email.png)
 
   - Faculty
 
-    ![Execer1-5-(student)Faculty](./images/pro5_student_faculty.png)
+    ![EX1-6-3](./images/pro5_student_faculty.png)
 
-- หน้า Professor: สามารถเลือก `Field` ที่จะ `Filter` ได้ โดยเมื่อ Input แล้วนำข้อมูลที่กรอกไปใช้ โดยขอแค่อยู่ภายใน `Field` ที่เลือก และไม่สนตัวเล็กและตัวใหญ่
+- หน้า Professor: สามารถเลือก `Field` ที่จะ `Filter` ได้ โดยเมื่อ Input แล้วนำข้อมูลที่กรอกไปใช้ โดยขอแค่อยู่ภายใน `Field` ที่เลือก และไม่สนตัวเล็กและตัวใหญ่ (0.3 คะแนน)
 
   - Full Name (Default)
 
-    ![Execer1-5-(professor)Full Name](./images/pro5_professor_full_name.png)
+    ![EX1-6-4](./images/pro5_professor_full_name.png)
 
   - Faculty
 
-    ![Execer1-5-(professor)Faculty](./images/pro5_professor_faculty.png)
+    ![EX1-6-5](./images/pro5_professor_faculty.png)
 
-- หน้า Faculty: เมื่อ Input แล้วนำข้อมูลที่กรอกไปใช้ `Filter` ชื่อ ขอแค่ข้อมูลอยู่ภายใน และไม่สนตัวเล็กตัวใหญ่
+- หน้า Faculty: เมื่อ Input แล้วนำข้อมูลที่กรอกไปใช้ `Filter` ชื่อ ขอแค่ข้อมูลอยู่ภายใน และไม่สนตัวเล็กตัวใหญ่ (0.1 คะแนน)
 
-    ![Execer1-5-(faculty)](./images/pro5_faculty.png)
+    ![EX1-6-6](./images/pro5_faculty.png)
 
-- หน้า Course: เมื่อ Input แล้วนำข้อมูลที่กรอกไปใช้ `Filter` ชื่อ ขอแค่ข้อมูลอยู่ภายใน และไม่สนตัวเล็กตัวใหญ่
+- หน้า Course: เมื่อ Input แล้วนำข้อมูลที่กรอกไปใช้ `Filter` ชื่อ ขอแค่ข้อมูลอยู่ภายใน และไม่สนตัวเล็กตัวใหญ่ (0.1 คะแนน)
 
-    ![Execer1-5-(course)](./images/pro5_course.png)
+    ![EX1-6-7](./images/pro5_course.png)
 
-## 2. เพิ่ม-ลบ-แก้ไข ข้อมูล
+## 2. เพิ่มข้อมูลนักเรียน
 
-2.1. จากหน้า Student ให้นักศึกษาเพิ่มปุ่มสำหรับเพิ่มข้อมูลนักศึกษาดังรูปโดยมันจะต้องกดแล้วไปที่ url สำหรับสร้างข้อมูล จากนั้นทำการเพิ่ม View โดยกำหนดให้ใช้ Method `POST` และใช้ไฟล์ create_student.html (แก้ไข url ในไฟล์ให้ถูกต้อง)
+2.1. จากหน้า Student ให้นักศึกษาเพิ่มปุ่มสำหรับเพิ่มข้อมูลนักศึกษาดังรูปโดยมันจะต้องกดแล้วไปที่ url สำหรับสร้างข้อมูล จากนั้นทำการเพิ่ม View โดยกำหนดให้ใช้ Method `POST` และใช้ไฟล์ create_student.html (แก้ไข url ในไฟล์ให้ถูกต้อง) (0.5 คะแนน)
 - ปุ่ม create student
-![Execer7-4](./images/pro5_student_create_btn.png)
+![EX2-1](./images/pro5_student_create_btn.png)
 - หน้าสร้างข้อมูลนักศึกษา
-![Execer7-4](./images/pro5_student_create_page.png)
-
-2.2 จากข้อ 1.1 ให้นักศึกษาแก้ไขโค้ดดังนี้ในไฟล์ index.html จากนั้นทำการเพิ่ม View สำหรับลบข้อมูลโดยต้องใช้ method delete
-
-```html
-<tr>
-    <th class="px-4 py-3">Student ID</th>
-    <th class="px-4 py-3">Full Name</th>
-    <th class="px-4 py-3">Email</th>
-    <th class="px-4 py-3">Phone nuber</th>
-    <th class="px-4 py-3">Faculty</th>
-    <th class="px-4 py-3">Registration Section</th>
-    <th class="px-4 py-3 text-right">Actions</th>
-</tr>
-
-...
-
-<tr class="hover:bg-orange-50 transition">
-    <td class="px-4 py-3">{{ }}</td>
-    <td class="px-4 py-3 font-medium">{{ }} {{ }}</td>
-    <td class="px-4 py-3">{{ }}</td>
-    <td class="px-4 py-3">{{ }}</td>
-    <td class="px-4 py-3">{{ }}</td>
-    <td class="px-4 py-3">
-        {% if student.enrolled_sections.count %}
-        {% for section in student.enrolled_sections.all|sortSectionByDayOfWeek|dictsort:'day_of_week_num' %}
-            {{ }}
-            ({{ }}) - {{ }}
-            {{ }}-{{ }}<br />
-        {% endfor %}
-        {% else %}
-        -
-        {% endif %}
-    </td>
-    <td>
-        <button onclick="deleteStudent({{  }})"
-                class="px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600">
-            Delete
-        </button>
-    </td>
-</tr>
-```
-
-จากนั้นเพิ่ม script
-``` html
-<script>
-async function deleteStudent(studentId) {
-  if (!confirm('ยืนยันลบนักศึกษา?')) return;
-
-  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-
-  const res = await fetch(`/registration/student/${studentId}/delete/`, {
-    method: 'DELETE',
-    headers: {
-      'X-CSRFToken': csrftoken
-    }
-  });
-
-  if (res) {
-    window.location.reload();
-  } else {
-    alert('ลบไม่สำเร็จ');
-  }
-}
-</script>
-```
-
-2.3 ให้นักศึกษาเพิ่ม View สำหรับแก้ไขข้อมูลโดยต้องเพิ่มปุ่ม edit เข้าไปเหมือนปุ่ม delete โดยแก้ไขโค้ดที่ index.html ดังนี้
-
-```html
-<td>
-    <a href="/registration/student/{{  }}/edit/" class="px-3 py-1 rounded bg-orange-500 text-white hover:bg-orange-600">
-        Edit
-    </a>
-    <button onclick="deleteStudent({{  }})"
-            class="px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600">
-        Delete
-    </button>
-</td>
-```
-จากนั้นให้ใช้ไฟล์ edit_student.html ในการแก้ไขข้อมูล
-
-**Hint:** ใน View ให้ใช้ json.loads(request.body) เพราะในไฟล์ edit_student.html ฟังก์ชัน handleUpdate มีการแนบ payload ไปเป็น json
-
-## Demo
-
-https://youtu.be/xIr_FoIuOks
+![EX2-2](./images/pro5_student_create_page.png)
