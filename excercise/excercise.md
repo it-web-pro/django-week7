@@ -97,12 +97,15 @@ class StudentProfile(models.Model):
 7. ให้นักศึกษาลากโฟลเดอร์ `templates` และ `templatetags` ใน excercise ไปไว้ที่โฟลเดอร์ `registration` ขอโปรเจคนักศึกษา
 
 ```sh
-templates/
-    - index.hmtl
-    - nav.html
-    - professor.html
-    - course.html
-    - faculty.html
+registration/
+    - templates/
+        - index.hmtl
+        - nav.html
+        - professor.html
+        - course.html
+        - faculty.html
+    - templatetags/
+        - custom_filter.py
 ```
 
 ## 1. แสดงผลข้อมูลใน Template
@@ -127,7 +130,7 @@ templates/
 
 1.5 กำหนด PATH สำหรับ Navbar ของเว็บไซต์ในไฟล์ nav.html (0.2 คะแนน)
 
-**Hint:** ใช้ template tag `url` - [Ref](https://docs.djangoproject.com/en/5.2/ref/templates/builtins/#url)
+**Hint:** ใช้ template tag `url` - [DOC](https://docs.djangoproject.com/en/5.2/ref/templates/builtins/#url)
 
 ```HTML
     <header>
@@ -184,3 +187,5 @@ templates/
 ![EX2-1](./images/pro5_student_create_btn.png)
 - หน้าสร้างข้อมูลนักศึกษา
 ![EX2-2](./images/pro5_student_create_page.png)
+
+**ใน View ที่สร้างนักเรียนเมื่อ create Student สำเร็จให้ทำการ `redirect` ไปที่หน้า รายชื่อนักเรียน (index.html)**

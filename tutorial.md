@@ -84,7 +84,6 @@ urlpatterns = [
 เรามาปรับแก้ไข view index() ให้ทำการ query ข้อมูล question 5 รายการล่าสุด เรียงตาม pub_date แบบจากมากไปน้อย
 
 ```python
-from django.http import HttpResponse
 from django.shortcuts import render
 
 from .models import Question
