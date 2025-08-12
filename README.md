@@ -80,4 +80,4 @@ urlpatterns = [
 ```
 
 
-*ไปต่อกันที่ไฟล์ `writing-views.md`*
+*เรามาเริ่มทำ TUTORIAL กันเลย ไปที่ไฟล์ `tutorial.md`*
