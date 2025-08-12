@@ -220,6 +220,8 @@ def vote(request, question_id):
 </html>
 ```
 
+*เรามาเรียนรู้เพิ่มเติมเกี่ยวกับ VIEWS กัน เปิดไฟล์ `writing-views.md` กันเลยครับ*
+
 ## Let's try class-based views
 
 ### Class-based views คืออะไร?
